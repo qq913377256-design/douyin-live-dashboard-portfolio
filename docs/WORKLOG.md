@@ -1,5 +1,12 @@
 # 工作日志
 
+## 2026-07-11 09:06
+
+- 创建公开仓库`qq913377256-design/douyin-live-dashboard-portfolio`，并推送首个本地提交`5b0582c`。
+- 启用GitHub Pages，发布源设为GitHub Actions，站点地址为`https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/`。
+- 首次工作流在启用Pages前的`Setup Pages`步骤失败；本次提交将触发新的完整构建与部署。
+- 未完成项：等待工作流完成后验证公开页面、视频和静态资源。
+
 ## 2026-07-11 01:04
 
 - 固定React、Vite、TypeScript与pnpm依赖版本，生成`pnpm-lock.yaml`，统一GitHub Pages工作流为冻结锁文件构建。
