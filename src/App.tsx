@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import {
-  alerts, alertStatusNote, analysisChains, architecture, businessQuestions, dataStatement, eventDefinitions,
-  faqs, features, footerCopy, metrics, navItems, observableData, reportFlow, reportOutline,
+  alerts, alertStatusNote, analysisChains, architecture, businessQuestions, dataStatement, deliveryComparisons,
+  deliveryCopy, deliveryValues, eventDefinitions, faqs, features, footerCopy, metrics, navItems, observableData, reportFlow, reportOutline,
   roadmap, sectionIntros, site, techTags, unavailableData,
 } from './content'
 import { DashboardPreview } from './components/DashboardPreview'
@@ -46,7 +46,35 @@ function App() {
             <DashboardPreview />
           </SectionCard>
 
-          <SectionCard id="features" number="03" title="看板功能" intro={sectionIntros.features}>
+          <SectionCard id="delivery" number="03" title="一个链接，即可使用" intro={sectionIntros.delivery}>
+            <div className="delivery-lead">
+              <p>{deliveryCopy.lead}</p>
+              <p>{deliveryCopy.distribution}</p>
+            </div>
+            <div className="delivery-value-grid">
+              {deliveryValues.map((value, index) => (
+                <article className="delivery-value-card" key={value.title}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </article>
+              ))}
+            </div>
+            <div className="delivery-comparison">
+              <h3>{deliveryCopy.comparisonTitle}</h3>
+              <p className="table-hint">窄屏设备可左右滑动查看完整表格</p>
+              <div className="table-scroll" tabIndex={0} role="region" aria-label="轻量化交付与常见传统BI交付方式对比">
+                <table>
+                  <caption>{deliveryCopy.comparisonTitle}</caption>
+                  <thead><tr><th scope="col">对比维度</th><th scope="col">本项目独立 Web 应用</th><th scope="col">常见 BI 交付</th></tr></thead>
+                  <tbody>{deliveryComparisons.map((item) => <tr key={item.dimension}><th scope="row">{item.dimension}</th><td>{item.webApp}</td><td>{item.biDelivery}</td></tr>)}</tbody>
+                </table>
+              </div>
+              <p className="delivery-comparison-note">{deliveryCopy.comparisonNote}</p>
+            </div>
+          </SectionCard>
+
+          <SectionCard id="features" number="04" title="看板功能" intro={sectionIntros.features}>
             <div className="feature-grid">
               {features.map((feature, index) => (
                 <article className="feature-card" key={feature.name}>
@@ -60,7 +88,7 @@ function App() {
             </div>
           </SectionCard>
 
-          <SectionCard id="data-scope" number="04" title="数据范围" intro={sectionIntros['data-scope']}>
+          <SectionCard id="data-scope" number="05" title="数据范围" intro={sectionIntros['data-scope']}>
             <div className="scope-grid">
               <article className="scope-card scope-observable"><h3>当前可观测</h3><ul>{observableData.map((item) => <li key={item}>{item}</li>)}</ul></article>
               <article className="scope-card scope-unavailable"><h3>当前不可获得</h3><ul>{unavailableData.map((item) => <li key={item.name}><b>{item.name}</b><span>{item.reason}</span></li>)}</ul></article>
@@ -68,7 +96,7 @@ function App() {
             <Disclaimer text={dataStatement} />
           </SectionCard>
 
-          <SectionCard id="metrics" number="05" title="指标口径" intro={sectionIntros.metrics}>
+          <SectionCard id="metrics" number="06" title="指标口径" intro={sectionIntros.metrics}>
             <MetricTable metrics={metrics} />
             <div className="event-definitions">
               <h3>三个关键事件的统一定义</h3>
@@ -76,7 +104,7 @@ function App() {
             </div>
           </SectionCard>
 
-          <SectionCard id="alerts" number="06" title="异常与建议" intro={sectionIntros.alerts}>
+          <SectionCard id="alerts" number="07" title="异常与建议" intro={sectionIntros.alerts}>
             <p className="config-note">{alertStatusNote}</p>
             <div className="alert-grid">
               {alerts.map((alert) => <article key={alert.scene} className={`alert-card level-${alert.level}`}>
@@ -87,7 +115,7 @@ function App() {
             </div>
           </SectionCard>
 
-          <SectionCard id="analysis" number="07" title="运营分析方法" intro={sectionIntros.analysis}>
+          <SectionCard id="analysis" number="08" title="运营分析方法" intro={sectionIntros.analysis}>
             <div className="questions-block"><h3>这个看板可以回答什么</h3><ul>{businessQuestions.map((question) => <li key={question}>{question}</li>)}</ul></div>
             <div className="analysis-list">
               {analysisChains.map((chain, index) => <article key={chain.phenomenon} className="analysis-chain" aria-label={`分析案例${index + 1}：${chain.phenomenon}`}>
@@ -96,17 +124,17 @@ function App() {
             </div>
           </SectionCard>
 
-          <SectionCard id="report" number="08" title="直播复盘报告" intro={sectionIntros.report} status="规划中 · Phase 2">
+          <SectionCard id="report" number="09" title="直播复盘报告" intro={sectionIntros.report} status="规划中 · Phase 2">
             <div className="planning-banner"><b>当前状态：规划中</b><span>尚未作为现成功能开放，以下是确定的产品结构与交付方向。</span></div>
             <ol className="report-flow">{reportFlow.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol>
             <article className="report-paper"><div className="binding-line" aria-hidden="true" /><p className="paper-kicker">EXPECTED REPORT / PHASE 2</p><h3>单场直播复盘报告</h3><ol>{reportOutline.map((item) => <li key={item}>{item}</li>)}</ol><p className="paper-note">预期输出为结构化 Markdown，并支持导出 PDF；不在此处伪造已生成报告。</p></article>
           </SectionCard>
 
-          <SectionCard id="roadmap" number="09" title="路线图" intro={sectionIntros.roadmap}>
+          <SectionCard id="roadmap" number="10" title="路线图" intro={sectionIntros.roadmap}>
             <Roadmap stages={roadmap} />
           </SectionCard>
 
-          <SectionCard id="technology" number="10" title="技术实现" intro={sectionIntros.technology}>
+          <SectionCard id="technology" number="11" title="技术实现" intro={sectionIntros.technology}>
             <div className="architecture" aria-label="系统分层架构">
               <div className="architecture-flow">{architecture.map((layer, index) => <div className="architecture-step" key={layer.name}><article><h3>{layer.name}</h3><p>{layer.detail}</p></article>{index < architecture.length - 1 && <i aria-hidden="true" />}</div>)}</div>
               <aside className="static-site-node"><span>独立展示</span><h3>在线作品页</h3><p>静态站点 · 无实时API连接</p></aside>
@@ -114,7 +142,7 @@ function App() {
             <ul className="tech-tags" aria-label="技术栈">{techTags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
           </SectionCard>
 
-          <SectionCard id="faq" number="11" title="常见问题" intro={sectionIntros.faq}>
+          <SectionCard id="faq" number="12" title="常见问题" intro={sectionIntros.faq}>
             <div className="faq-list">{faqs.map((faq, index) => <details key={faq.question} open={index === 0}><summary>{faq.question}<span aria-hidden="true" /></summary><p>{faq.answer}</p></details>)}</div>
           </SectionCard>
 

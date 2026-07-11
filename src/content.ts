@@ -1,5 +1,7 @@
 export type NavItem = { id: string; number: string; label: string }
 export type Feature = { name: string; question: string; display: string; action: string }
+export type DeliveryValue = { title: string; description: string }
+export type DeliveryComparison = { dimension: string; webApp: string; biDelivery: string }
 export type Metric = { name: string; formula: string; window: string; meaning: string; note: string }
 export type AlertLevel = '紧急' | '重要' | '提醒' | '机会' | '系统'
 export type AlertRule = { scene: string; level: AlertLevel; trigger: string; data: string; action: string; time: string }
@@ -24,19 +26,21 @@ export const site = {
 export const navItems: NavItem[] = [
   { id: 'home', number: '01', label: '项目首页' },
   { id: 'demo', number: '02', label: '60秒演示' },
-  { id: 'features', number: '03', label: '看板功能' },
-  { id: 'data-scope', number: '04', label: '数据范围' },
-  { id: 'metrics', number: '05', label: '指标口径' },
-  { id: 'alerts', number: '06', label: '异常与建议' },
-  { id: 'analysis', number: '07', label: '运营分析方法' },
-  { id: 'report', number: '08', label: '直播复盘报告' },
-  { id: 'roadmap', number: '09', label: '路线图' },
-  { id: 'technology', number: '10', label: '技术实现' },
-  { id: 'faq', number: '11', label: '常见问题' },
+  { id: 'delivery', number: '03', label: '轻量化交付' },
+  { id: 'features', number: '04', label: '看板功能' },
+  { id: 'data-scope', number: '05', label: '数据范围' },
+  { id: 'metrics', number: '06', label: '指标口径' },
+  { id: 'alerts', number: '07', label: '异常与建议' },
+  { id: 'analysis', number: '08', label: '运营分析方法' },
+  { id: 'report', number: '09', label: '直播复盘报告' },
+  { id: 'roadmap', number: '10', label: '路线图' },
+  { id: 'technology', number: '11', label: '技术实现' },
+  { id: 'faq', number: '12', label: '常见问题' },
 ]
 
 export const sectionIntros: Record<string, string> = {
   demo: '用一分钟浏览完整产品动线：从直播全景、趋势变化，到异常建议、评论意图与商品切换影响。',
+  delivery: '面向直播运营人员的独立 Web 应用，从工作群里的链接直接进入直播诊断页面。',
   features: '看板把直播信号拆成流量、互动、内容和商品四个层次；每个模块都对应一个业务问题和下一步动作。',
   'data-scope': '先说明什么能观察、什么不能获得，避免把页面采样信号误写成平台经营数据。',
   metrics: '每个数字都需要定义、窗口和使用边界。这里公开核心口径，让分析结论可以被复核。',
@@ -55,6 +59,29 @@ export const videoSummary = [
   '查看问题队列与带触发依据的当前建议。',
   '将评论分为价格、规格、购买方式、库存和口碑等意图。',
   '比较商品切换后一、三、五分钟的在线与评论变化。',
+]
+
+export const deliveryCopy = {
+  lead: '本项目采用 Web 化部署。看板上线后，运营人员无需安装桌面软件、配置本地环境、编写 SQL 或学习复杂的 BI 操作，只需在浏览器中打开链接，即可查看直播实时数据、在线人数趋势、互动表现、异常事件和运营建议。',
+  distribution: '看板链接可以直接通过企业微信、飞书、钉钉或工作群进行分发。后续可以继续增加登录认证、角色权限和数据范围控制，使主播、运营和管理人员查看各自权限范围内的数据。',
+  comparisonTitle: '与常见传统 BI 交付方式对比',
+  comparisonNote: '两种交付方式定位不同。传统 BI 适合统一管理多主题数据和经营报表；本项目把入口收敛到单场直播诊断，让运营人员从链接直接进入当前任务。',
+}
+
+export const deliveryValues: DeliveryValue[] = [
+  { title: '浏览器即开即用', description: '打开专属链接，直接进入直播诊断页面和当前运营任务。' },
+  { title: '无需安装客户端', description: '不要求配置本地环境、数据库工具或桌面端分析软件。' },
+  { title: '链接便于团队分发', description: '可通过企业微信、飞书、钉钉或工作群发送统一入口。' },
+  { title: '支持后续权限扩展', description: '可继续接入登录认证、角色权限和数据范围控制。' },
+]
+
+export const deliveryComparisons: DeliveryComparison[] = [
+  { dimension: '访问方式', webApp: '打开专属链接，直接进入直播诊断页面', biDelivery: '通过浏览器访问 BI 门户、工作台或指定报表' },
+  { dimension: '使用门槛', webApp: '围绕直播运营任务组织页面，进入后即可查看核心诊断', biDelivery: '通常需要了解平台导航、报表结构和筛选口径' },
+  { dimension: '分发方式', webApp: '复制页面链接到企业微信、飞书、钉钉或工作群', biDelivery: '分享报表链接、工作区、应用入口或定期导出' },
+  { dimension: '业务场景', webApp: '单场直播的实时观察、异常诊断和运营动作', biDelivery: '跨部门、多主题、历史分析和经营报表' },
+  { dimension: '页面定制', webApp: '围绕直播运营流程定制信息层级、交互和建议', biDelivery: '依托平台组件、主题和开发能力进行配置' },
+  { dimension: '扩展能力', webApp: '后续可增加登录、角色权限和数据范围控制', biDelivery: '可通过平台权限、数据模型、插件或二次开发扩展' },
 ]
 
 export const features: Feature[] = [

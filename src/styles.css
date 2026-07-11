@@ -149,6 +149,18 @@ h1, h2, h3, h4 { color: var(--heading); font-family: var(--font-heading); }
 .dashboard-image-button img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; border-radius: 12px; background: var(--dashboard-matte); }
 .preview-button { margin-top: 12px; }
 .figure-caption { margin-top: 10px; }
+.delivery-lead { position: relative; display: grid; gap: 12px; padding: 22px 24px 22px 28px; overflow: hidden; border: 1px solid #c9deda; border-radius: 12px; background: linear-gradient(135deg, rgba(221, 241, 239, .72), rgba(255, 253, 249, .96)); }
+.delivery-lead::before { content: ""; position: absolute; inset-block: 0; left: 0; width: 4px; background: var(--accent); }
+.delivery-lead p { max-width: 920px; margin: 0; }
+.delivery-value-grid { display: grid; gap: 14px; }
+.delivery-value-card { min-height: 172px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-strong); }
+.delivery-value-card > span { color: var(--accent); font-size: 11px; font-weight: 750; letter-spacing: .08em; }
+.delivery-value-card h3 { margin: 22px 0 8px; font-size: 18px; }
+.delivery-value-card p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.delivery-comparison h3 { margin: 0 0 8px; font-size: 20px; }
+.delivery-comparison table { min-width: 760px; }
+.delivery-comparison thead th:first-child { width: 132px; }
+.delivery-comparison-note { margin: 14px 0 0; padding: 12px 14px; border-left: 3px solid #c5a98a; color: var(--ink-soft); background: #fbf6ef; font-size: 14px; }
 .image-dialog { position: fixed; z-index: 120; inset: 0; display: grid; place-items: center; padding: 56px 2vw 20px; background: rgba(11, 18, 32, .92); animation: dialog-in 160ms both; }
 @keyframes dialog-in { from { opacity: 0; } to { opacity: 1; } }
 .image-dialog img { max-width: 96vw; max-height: 88vh; object-fit: contain; touch-action: pinch-zoom; }
@@ -279,6 +291,7 @@ td code { display: inline-block; padding: 3px 6px; border-radius: 6px; backgroun
   .content-wrap { padding-inline: 24px; }
   .section-card { padding: 28px; border-radius: 18px; }
   .feature-grid, .scope-grid, .alert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .delivery-value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -313,6 +326,7 @@ td code { display: inline-block; padding: 3px 6px; border-radius: 6px; backgroun
   .content-wrap { padding-inline: 48px; }
   .section-card { padding: 48px; }
   .hero h1 { font-size: 52px; }
+  .delivery-value-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1023px) {

@@ -32,7 +32,9 @@ def assert_page(page: Page, width: int, height: int) -> None:
     page.set_viewport_size({"width": width, "height": height})
     page.goto(BASE_URL, wait_until="networkidle")
     assert page.title() == "抖音直播电商健康诊断看板｜在线作品页"
-    assert page.locator("main section[id]").count() == 11
+    assert page.locator("main section[id]").count() == 12
+    assert page.locator("#delivery .delivery-value-card").count() == 4
+    assert page.locator("#delivery tbody tr").count() == 6
     overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
     assert overflow <= 1, f"page overflows by {overflow}px at {width}px"
     video = page.locator("video")
@@ -53,6 +55,11 @@ def assert_interactions(page: Page) -> None:
     page.locator('a[href="#metrics"]').filter(has_text="查看指标口径").click()
     page.wait_for_url("**#metrics")
     assert page.locator("#metrics-title").is_visible()
+
+    page.locator('a[href="#delivery"]').first.click()
+    page.wait_for_url("**#delivery")
+    assert page.locator("#delivery-title").is_visible()
+    page.wait_for_function("document.querySelector('.sidebar-desktop a[aria-current=\"location\"]')?.getAttribute('href') === '#delivery'")
 
     preview = page.get_by_role("button", name="打开看板原尺寸预览")
     preview.click()
@@ -82,6 +89,13 @@ def assert_interactions(page: Page) -> None:
     page.keyboard.press("Escape")
     assert menu.get_attribute("aria-expanded") == "false"
     assert page.evaluate("document.activeElement?.classList.contains('menu-button')")
+
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(BASE_URL + "#delivery", wait_until="networkidle")
+    assert page.locator("#delivery-title").is_visible()
+    comparison = page.locator("#delivery .table-scroll")
+    assert comparison.evaluate("element => element.scrollWidth > element.clientWidth")
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 1
 
 
 def main() -> int:
