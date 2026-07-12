@@ -2,7 +2,7 @@ export type NavItem = { id: string; number: string; label: string }
 export type Feature = { name: string; question: string; display: string; action: string }
 export type DeliveryValue = { title: string; description: string }
 export type DeliveryComparison = { dimension: string; webApp: string; biDelivery: string }
-export type Metric = { name: string; formula: string; window: string; meaning: string; note: string }
+export type Metric = { name: string; tooltip: string }
 export type AlertLevel = '紧急' | '重要' | '提醒' | '机会' | '系统'
 export type AlertRule = { scene: string; level: AlertLevel; trigger: string; data: string; action: string; time: string }
 export type AnalysisChain = { phenomenon: string; cause: string; verify: string; action: string }
@@ -43,7 +43,7 @@ export const sectionIntros: Record<string, string> = {
   delivery: '面向直播运营人员的独立 Web 应用，从工作群里的链接直接进入直播诊断页面。',
   features: '看板把直播信号拆成流量、互动、内容和商品四个层次；每个模块都对应一个业务问题和下一步动作。',
   'data-scope': '先说明什么能观察、什么不能获得，避免把页面采样信号误写成平台经营数据。',
-  metrics: '每个数字都需要定义、窗口和使用边界。这里公开核心口径，让分析结论可以被复核。',
+  metrics: '以下短文案与看板指标一一对应，用于快速说明每个数字的统计范围和含义。',
   alerts: '当前看板已完成基于规则的诊断原型：建议由触发条件、关键数据、优先级和明确动作共同组成。',
   analysis: '单个指标不能直接解释原因。运营判断需要从现象出发，提出假设，再用相邻信号验证并形成动作。',
   report: '将实时看板扩展为一场直播结束后的结构化总结，沉淀关键时刻、原因假设与下一场行动。',
@@ -118,20 +118,21 @@ export const unavailableData = [
 export const dataStatement = '数据说明：本项目基于直播页面可观测信息和采样结果构建分析指标，部分指标属于采样值、代理指标、规则结果或模型分类，不等同于抖音官方后台口径。当前不包含成交额、订单、支付人数、退款和精准流量来源等交易经营数据。公开页面不运行采集任务，不存储账号信息或个人标识。'
 
 export const metrics: Metric[] = [
-  { name: '当前在线人数', formula: '最新一条有效样本的在线人数', window: '最新值', meaning: '当前直播间承载规模', note: '可能存在页面延迟或平台平滑' },
-  { name: '在线峰值', formula: 'max(采集区间内在线人数)', window: '全场 / 区间', meaning: '直播达到的最高在线规模', note: '同时标注发生时间' },
-  { name: '平均在线人数', formula: 'Σ(在线人数 × 持续时长) / 总有效时长', window: '全场 / 区间', meaning: '时间加权的在线水平', note: '缺失样本不参与计算' },
-  { name: '3分钟在线变化', formula: '在线(t) - 在线(t-3min)', window: '3分钟', meaning: '短期净增或净减', note: '同时展示绝对值与百分比' },
-  { name: '3分钟在线变化率', formula: '(在线(t)-在线(t-3min)) / max(在线(t-3min), 1)', window: '3分钟', meaning: '跨直播规模比较变化', note: '小基数时限制异常值' },
-  { name: '在线人数下跌高峰', formula: '所有3分钟窗口中最小的在线变化', window: '3分钟滚动', meaning: '最严重流失时刻', note: '标注事件名称、时间和数值' },
-  { name: '评论总数', formula: '采集到的有效评论条数', window: '全场 / 区间', meaning: '总互动规模', note: '排除系统消息和明显重复' },
-  { name: '评论速率', formula: '最近1分钟有效评论数', window: '1分钟', meaning: '当前互动热度', note: '可增加3分钟平滑值' },
-  { name: '评论高峰', formula: '3分钟评论量的最大值', window: '全场', meaning: '互动最集中时刻', note: '记录当时商品和事件' },
-  { name: '购买意图评论数', formula: '询价、购买方式、优惠、库存等分类评论数', window: '1 / 3 / 5分钟', meaning: '潜在转化需求', note: '模型结果，不等于订单' },
-  { name: '评论意图占比', formula: '某意图评论数 / 已分类评论数', window: '近5分钟 / 全场', meaning: '用户关注点结构', note: '未分类评论单独列出' },
-  { name: '商品切换后在线变化', formula: '切换后第N分钟在线 - 切换时在线', window: '1 / 3 / 5分钟', meaning: '商品留人和承接影响', note: '仅反映相关性，不证明因果' },
-  { name: '数据完整率', formula: '有效样本数 / 预期样本数', window: '全场', meaning: '判断趋势图可信度', note: '低于阈值时提示数据不完整' },
-  { name: '数据新鲜度', formula: '当前时间 - 最新样本时间', window: '实时', meaning: '任务是否正常更新', note: '超过两倍采样间隔触发提示' },
+  { name: '当前在线', tooltip: '最近一次采集时直播间显示的在线人数。' },
+  { name: '在线变化', tooltip: '与上一次采集相比的在线人数变化。' },
+  { name: '在线峰值', tooltip: '本场监控期间记录到的最高在线人数。' },
+  { name: '平均在线', tooltip: '本场监控期间的整体平均在线水平。' },
+  { name: '3分钟留存占比', tooltip: '首次出现后超过3分钟仍再次被识别到的观众占比。' },
+  { name: '进场人数', tooltip: '本场监控期间新增进入直播间的观众人数。' },
+  { name: '进场速率', tooltip: '平均每分钟新增进入直播间的观众人数。' },
+  { name: '累计场观', tooltip: '本场直播累计进入直播间的观众规模。' },
+  { name: '可见观众数', tooltip: '本场观众名单中识别到的不同观众数量。' },
+  { name: '当前可见', tooltip: '最近一次采集时观众名单中的可见人数。' },
+  { name: '评论数', tooltip: '本场捕获并去重后的评论数量。' },
+  { name: '评论速率', tooltip: '本场平均每分钟产生的评论数量。' },
+  { name: '点赞数', tooltip: '直播页面当前显示的累计点赞数量。' },
+  { name: '购买意图', tooltip: '与价格、商品和购买相关的评论数量。' },
+  { name: '高频问题', tooltip: '问题弹幕队列中累计出现的问题次数。' },
 ]
 
 export const eventDefinitions = [

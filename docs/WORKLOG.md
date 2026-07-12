@@ -51,3 +51,12 @@
 - 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/
 - 线上复查：GitHub Pages已返回本次构建的JS和CSS资源，`#delivery`章节标题、四张价值卡片和对比表内容均已发布
 - 未完成项：无
+
+## 2026-07-12 20:21
+
+- 将指标口径表替换为15项看板指标及对应Tooltip短文案，内容集中维护在`src/content.ts`
+- 表格由五列详细口径调整为指标、Tooltip短文案两列，移动端继续使用表格容器横向滚动
+- 增加15行指标和3分钟留存占比文案的浏览器断言
+- 验证通过：TypeScript类型检查、Vite生产构建及1440、1024、768、390像素Playwright测试
+- 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/#metrics
+- 未完成项：等待本次提交发布后复查线上指标表
