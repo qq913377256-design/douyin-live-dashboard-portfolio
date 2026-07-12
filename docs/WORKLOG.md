@@ -59,4 +59,5 @@
 - 增加15行指标和3分钟留存占比文案的浏览器断言
 - 验证通过：TypeScript类型检查、Vite生产构建及1440、1024、768、390像素Playwright测试
 - 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/#metrics
-- 未完成项：等待本次提交发布后复查线上指标表
+- 线上复查：GitHub Pages已切换到本次构建资源，当前在线、3分钟留存占比和高频问题等新文案均已发布
+- 未完成项：无
