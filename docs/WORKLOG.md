@@ -68,4 +68,5 @@
 - 恢复原有宽表格样式和移动端横向滚动提示，保留15项新指标内容
 - 验证通过：TypeScript类型检查、Vite生产构建及四档视口Playwright测试
 - 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/#metrics
-- 未完成项：等待发布后复查线上表头
+- 线上复查：GitHub Pages已显示指标、统计口径表头，Tooltip短文案表头已移除
+- 未完成项：无
