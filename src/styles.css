@@ -193,8 +193,6 @@ h1, h2, h3, h4 { color: var(--heading); font-family: var(--font-heading); }
 .table-hint { margin: 0 0 8px; color: var(--ink-soft); font-size: 13px; }
 .table-scroll { width: 100%; overflow-x: auto; border: solid var(--line); border-width: 1px 0; scrollbar-color: #c5a98a transparent; }
 table { width: 100%; min-width: 860px; border-collapse: separate; border-spacing: 0; font-size: 13px; line-height: 1.55; }
-.metric-table { min-width: 560px; }
-.metric-table thead th:first-child { width: 180px; }
 caption { padding: 0; height: 1px; overflow: hidden; text-align: left; }
 th, td { min-height: 52px; padding: 13px 14px; border-bottom: 1px solid #ebdfd1; text-align: left; vertical-align: top; }
 thead th { color: var(--heading); background: #f3e7d8; font-weight: 700; }

@@ -36,6 +36,7 @@ def assert_page(page: Page, width: int, height: int) -> None:
     assert page.locator("#delivery .delivery-value-card").count() == 4
     assert page.locator("#delivery tbody tr").count() == 6
     assert page.locator("#metrics .metric-table tbody tr").count() == 15
+    assert page.locator("#metrics .metric-table thead").get_by_text("统计口径", exact=True).is_visible()
     assert page.locator("#metrics .metric-table").get_by_text("首次出现后超过3分钟仍再次被识别到的观众占比。").is_visible()
     overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
     assert overflow <= 1, f"page overflows by {overflow}px at {width}px"

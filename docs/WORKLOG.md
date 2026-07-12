@@ -61,3 +61,11 @@
 - 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/#metrics
 - 线上复查：GitHub Pages已切换到本次构建资源，当前在线、3分钟留存占比和高频问题等新文案均已发布
 - 未完成项：无
+
+## 2026-07-12 20:30
+
+- 根据反馈将指标表第二列表头由Tooltip短文案改为统计口径
+- 恢复原有宽表格样式和移动端横向滚动提示，保留15项新指标内容
+- 验证通过：TypeScript类型检查、Vite生产构建及四档视口Playwright测试
+- 公开链接：https://qq913377256-design.github.io/douyin-live-dashboard-portfolio/#metrics
+- 未完成项：等待发布后复查线上表头
